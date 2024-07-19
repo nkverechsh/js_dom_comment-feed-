@@ -4,6 +4,10 @@
   box-sizing: border-box;
 }
 
+.error {
+  background-color: rgb(255, 80, 80);
+}
+
 body {
   margin: 0;
 }
