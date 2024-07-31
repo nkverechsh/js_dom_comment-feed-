@@ -2,17 +2,21 @@
 
 // Список комментов
 const commentList = document.getElementById("commentList");
+
 // Форма комментария
 const commentName = document.getElementById("commentName");
 const commentText = document.getElementById("commentText");
 const writeButton = document.getElementById("writeButton");
+
 // Время в комменте
 const commentTime = document.getElementById("commentTime");
+
 // Кол-во реакций в комменте
 const commentLike = document.getElementById("commentLike");
 const likeNumber = document.getElementById("likeNumber");
 
 const nowDate = new Date();
+
 // Форматирование вывода даты
 const option = {
     year: '2-digit',
@@ -25,9 +29,11 @@ const option = {
 
 
 writeButton.addEventListener("click", () => {
+
 // Сброс ошибки заполнения формы
     commentName.classList.remove("error");
     commentText.classList.remove("error");
+
 // Проверка заполнения формы
     if(commentName.value ==="" || commentText.value === "") {
         commentName.classList.add("error");
@@ -46,11 +52,17 @@ writeButton.addEventListener("click", () => {
     `
     <li class="comment">
         <div class="comment-header">
-            <div>${commentName.value}</div>
-                <div>${nowDate.toLocaleString("ru", option).replace(",","")}</div>
+            <div>
+                ${commentName.value}
+            </div>
+            <div>
+                ${nowDate.toLocaleString("ru", option).replace(",","")}
+            </div>
         </div>
         <div class="comment-body">
-            <div class="comment-text">${commentText.value}</div>
+            <div class="comment-text">
+                ${commentText.value}
+            </div>
         </div>
         <div class="comment-footer">
             <div class="likes">
@@ -60,9 +72,13 @@ writeButton.addEventListener("click", () => {
         </div>
     </li>
     `
-// Очистка формы после отправки коммента
+
+// Очистка формы после отправки коммента и постановка курсора на поле ввода имени
     commentName.value = "";
     commentText.value = "";
+
+// После отправки коммента актив курсора в поле имени
+    commentName.focus();
 });
 
 
