@@ -29,7 +29,7 @@ const comments = [
         date: "12.02.22 12:18",
         textAdd: "Это будет первый комментарий на этой странице",
         likesCounter: 3,
-        isLover: false,   
+        isLover: true,   
     },
     {
         name: "Василий Петрович",
@@ -61,16 +61,36 @@ const renderComments = () => {
                         <button class="edit-button">Редактировать</button>
                         <div class="likes">
                             <span class="likes-counter">${comment.likesCounter}</span>
-                            <button class="like-button"></button>
+                            <button class="like-button" data-index=${index} data-like=${comment.isLover}></button>
                         </div>
                     </div>
-
                 </li>`
     }).join("");
 
     commentList.innerHTML = commentsHtml;
-
+    
+    initLikesBtn();
     initDeleteButtonsListeners();
+};
+
+// Добавление лайка к комментариям
+
+const initLikesBtn = () => {
+    const likeBtns = document.querySelectorAll('.like-button');
+    for (const likeBtn of likeBtns) {
+        if (likeBtn.dataset.like === 'true') {
+            likeBtn.classList.add('-active-like');
+        }
+        if (likeBtn.dataset.like === 'false') {
+            likeBtn.classList.remove('-active-like');
+        }
+        likeBtn.addEventListener('click', () => {
+            likeBtn.classList.toggle('-active-like');
+        })
+        likeBtn.addEventListener('click', () => {
+            `console.log('like')`;
+        })
+    }
 };
 
 const initDeleteButtonsListeners = () => {
@@ -112,10 +132,11 @@ comments.push({
     name: commentName.value,
     date: (nowDate.toLocaleString("ru", option).replace(",","")),
     textAdd: commentText.value,
-    likesCounter: 45,
+    likesCounter: 0,
     isLover: false, 
 })
 
+initLikesBtn();
 renderComments();
 
 // Очистка формы после отправки коммента и постановка курсора на поле ввода имени
