@@ -80,15 +80,14 @@ const initLikesBtn = () => {
     for (const likeBtn of likeBtns) {
         if (likeBtn.dataset.like === 'true') {
             likeBtn.classList.add('-active-like');
+            comments.likesCounter = comments.likesCounter += 1;
         }
         if (likeBtn.dataset.like === 'false') {
             likeBtn.classList.remove('-active-like');
+            comments.likesCounter = comments.likesCounter -= 1;
         }
         likeBtn.addEventListener('click', () => {
             likeBtn.classList.toggle('-active-like');
-        })
-        likeBtn.addEventListener('click', () => {
-            `console.log('like')`;
         })
     }
 };
